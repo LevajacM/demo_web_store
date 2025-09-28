@@ -2,7 +2,7 @@ import type { Product } from '@/sanity.types';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface CartItem {
+export interface CartItem {
   product: Product;
   quantity: number;
 }

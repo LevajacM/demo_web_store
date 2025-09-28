@@ -13,7 +13,6 @@ import Form from 'next/form';
 import { Button } from './ui/button';
 import { ShoppingCart, CalendarArrowDown } from 'lucide-react';
 import useCartStore from '@/store/store';
-import { get } from 'http';
 
 const Header = () => {
   const { user } = useUser();
@@ -39,7 +38,7 @@ const Header = () => {
 
         <Link
           href='/'
-          className='text-2xl font-bold hover:opacity-50 transition-all duration-300 cursor-pointer mx-auto sm:mx-0'
+          className='text-2xl font-bold hover:opacity-90 transition-all duration-500 cursor-pointer mx-auto sm:mx-0 rounded-md overflow-hidden border-1 border-yellow-400 shadow-md hover:scale-120 hover:shadow-xl'
         >
           <Image src='/logo.png' alt='Logo' width={50} height={50} />
         </Link>
@@ -54,7 +53,7 @@ const Header = () => {
             type='text'
             name='query'
             placeholder='Search for products...'
-            className='bg-gray-50 text-gray-700 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-yellow-200 focus:ring-opacity-50 border w-full max-w-3xl'
+            className='bg-gray-50 text-gray-700 px-4 py-2 rounded focus:outline-none ring-yellow-300 focus:ring-1 focus:ring-yellow-400 focus:ring-opacity-50 border w-full max-w-3xl'
           />
         </Form>
         <div className='flex items-center mx-auto space-x-4 mt-4 sm:mt-0 sm:flex-none'>
@@ -68,7 +67,7 @@ const Header = () => {
               <ShoppingCart />
 
               <span>My Cart</span>
-              <span className='rounded-full bg-yellow-600 h-5 w-5 absolute -top-2 -right-2 items-center justify-center flex text-xs text-white'>
+              <span className='rounded-full bg-yellow-500 h-5 w-5 absolute -top-2 -right-2 items-center justify-center flex text-xs text-white'>
                 {itemsCount}
               </span>
             </Button>
@@ -97,7 +96,7 @@ const Header = () => {
               <Button
                 variant='ghost'
                 onClick={createClerkPasskey}
-                className='py-2 px-4  font-bold  cursor-pointer hover:opacity-45 transition-all duration-300 hover:text-gray-500 border-2 border-black hover:border-gray-500'
+                className='py-2 px-4  font-bold  cursor-pointer hover:opacity-45 transition-all duration-300 hover:text-gray-500 border-2 border-yellow-500 hover:border-gray-500'
               >
                 Create Passkey
               </Button>

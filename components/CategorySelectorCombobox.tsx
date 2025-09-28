@@ -39,7 +39,7 @@ const CategorySelectorCombobox = ({
           variant='outline'
           role='combobox'
           aria-expanded={open}
-          className='w-full max-w-full relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-yellow-400 hover:bg-yellow-400 transition-all duration-300 hover:text-white hover:shadow-md hover:shadow-gray-400 font-bold py-2 px-4 rounded-lg'
+          className='w-full max-w-full relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-yellow-500 text-gray-8700 hover:bg-yellow-400 transition-all duration-300 hover:text-white hover:shadow-md hover:shadow-gray-400 font-bold py-2 px-4 rounded-lg'
         >
           {value
             ? categories.find((category) => category._id === value)?.title

@@ -1,17 +1,15 @@
 import type { Metadata } from 'next';
 
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs';
+import { ClerkProvider } from '@clerk/nextjs';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../globals.css';
 import Header from '@/components/Header';
 import { SanityLive } from '@/sanity/lib/live';
+import { Toaster } from 'react-hot-toast';
+
+import { VisualEditing } from 'next-sanity';
+import { draftMode } from 'next/headers';
+import DisableDraftModeBtn from '@/components/DisableDraftModeBtn';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,7 +26,7 @@ export const metadata: Metadata = {
   description: 'E-commerce store demo',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -39,9 +37,16 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          {(await draftMode()).isEnabled && (
+            <>
+              <VisualEditing />
+              <DisableDraftModeBtn />
+            </>
+          )}
           <main>
             <Header />
             {children}
+            <Toaster />
           </main>
           <SanityLive />
         </body>

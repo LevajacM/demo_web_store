@@ -145,7 +145,7 @@ const CartPage = () => {
               <span>${useCartStore.getState().getTotalPrice().toFixed(2)}</span>
             </p>
           </div>
-          {/* checkout button or singin */}
+          {/* checkout button or signin */}
           {isSignedIn ? (
             <button
               onClick={handleCheckout}

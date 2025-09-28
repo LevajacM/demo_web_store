@@ -1,7 +1,13 @@
 import { getAllProducts } from '@/sanity/lib/products/getAllProducts';
 import { getAllCategories } from '@/sanity/lib/products/getAllCategories';
 import ProductsView from '@/components/ProductsView';
-import ActiveSaleBanner from '@/components/ActiveSaleBanner';
+import WeeklySaleBanner from '@/components/WeeklySaleBanner';
+import MonthlySaleBanner from '@/components/MonthlySaleBanner';
+import YearlySaleBanner from '@/components/YearlySaleBanner';
+import BlackFridaySaleBanner from '@/components/BlackFridaySaleBanner';
+
+export const dynamic = 'force-static';
+export const revalidate = 60; // Revalidate this page every 60 seconds
 
 export default async function Home() {
   const products = await getAllProducts();
@@ -10,10 +16,13 @@ export default async function Home() {
   return (
     <div>
       <div>
-        <ActiveSaleBanner />
+        <WeeklySaleBanner />
+        <MonthlySaleBanner />
+        <YearlySaleBanner />
+        <BlackFridaySaleBanner />
       </div>
-      <h1>Product Catalog qejbvwuebhviwuebhv</h1>
-      <div className='mx-4'>
+
+      <div className='flex flex-col items-center justify-top min-h-screen bg-gray-50 p-4'>
         <ProductsView products={products} categories={categories} />
       </div>
     </div>

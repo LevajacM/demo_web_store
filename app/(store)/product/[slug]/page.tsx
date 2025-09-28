@@ -5,6 +5,10 @@ import { imageUrl } from '@/lib/imageUrl';
 import { PortableText } from 'next-sanity';
 import { Button } from '@/components/ui/button';
 import AddToCartButton from '@/components/AddToCartButton';
+import ToastOverlay from '@/components/ToastOverlay';
+
+export const dynamic = 'force-static';
+export const revalidate = 60; // Revalidate this page every 60 seconds
 
 const SingleProductPage = async ({
   params,
@@ -14,6 +18,18 @@ const SingleProductPage = async ({
   const { slug } = await params;
   const singleProduct = await getSingleProductBySlug(slug);
   const { image, name, description, price } = singleProduct || {};
+
+  console.log(
+    // Debugovanje ISR-a (Incremental Static Regeneration):
+    // Kada koristiš revalidate, Next.js povremeno ponovo generiše stranicu na serveru. Ovaj log ćeš videti u terminalu svaki put kad Next.js generiše novu verziju stranice.
+    // Praćenje keširanja:
+    // Ako vidiš ovaj log, znači da se stranica renderuje na serveru (nije servirana iz keša).
+    // Praćenje parametara:
+    // Vidiš za koji slug se stranica generiše.
+    //---------------------------------------------------
+    crypto.randomUUID().slice(0, 5) +
+      `>>>>>> Rendering product page cache for ${slug}`
+  );
 
   if (!singleProduct) notFound();
 
@@ -60,12 +76,14 @@ const SingleProductPage = async ({
           {/* ADD TO CART BUTTON */}
           <div className='flex items-center space-x-4 mt-6'>
             <AddToCartButton product={singleProduct} disabled={isOutOfStock} />
-            <Button
-              variant='default'
-              className='bg-yellow-600 font-bold hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer hover:bg-yellow-500 '
-            >
-              Add to Basket
-            </Button>
+            <ToastOverlay product={singleProduct}>
+              <Button
+                variant='default'
+                className='bg-yellow-600 font-bold hover:shadow-lg transition-all duration-300 ease-in-out cursor-pointer hover:bg-yellow-500 '
+              >
+                Add to Cart
+              </Button>
+            </ToastOverlay>
           </div>
         </div>
       </div>
